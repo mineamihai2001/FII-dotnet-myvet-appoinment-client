@@ -1,12 +1,13 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSquarePlus, faSquareMinus } from "@fortawesome/free-solid-svg-icons";
+import { v4 as uuid } from "uuid";
 
 const add = (handler) => {
     const addBtn = document.getElementById("add");
     const formRow = document.getElementById("form-row");
     const inputs = document.getElementsByClassName("row-form-input");
 
-    const formData = {id: "#"};
+    const formData = { id: "#", uuid: uuid() };
     let fail = false;
     for (const input of inputs) {
         input.classList.remove("border-danger", "border-5");
@@ -28,7 +29,7 @@ const resetForm = () => {
     for (const input of inputs) {
         input.value = "";
     }
-}
+};
 
 const resetInputs = () => {
     const inputs = document.getElementsByClassName("row-form-input");
