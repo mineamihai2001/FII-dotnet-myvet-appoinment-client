@@ -6,7 +6,7 @@ const add = (handler) => {
     const formRow = document.getElementById("form-row");
     const inputs = document.getElementsByClassName("row-form-input");
 
-    const formData = {};
+    const formData = {id: "#"};
     let fail = false;
     for (const input of inputs) {
         input.classList.remove("border-danger", "border-5");
@@ -19,9 +19,16 @@ const add = (handler) => {
     }
     if (fail) return;
 
-    console.log(formData);
+    resetForm(); // empty the form for the new row
     handler(formData);
 };
+
+const resetForm = () => {
+    const inputs = document.getElementsByClassName("row-form-input");
+    for (const input of inputs) {
+        input.value = "";
+    }
+}
 
 const resetInputs = () => {
     const inputs = document.getElementsByClassName("row-form-input");

@@ -40,7 +40,7 @@ export default {
                         price: "10$"
                     },
                     {
-                        id: 1,
+                        id: 2,
                         first_name: "test",
                         last_name: "testing",
                         appointment: "10-12",
@@ -48,7 +48,7 @@ export default {
                         price: "10$"
                     },
                     {
-                        id: 1,
+                        id: 3,
                         first_name: "test",
                         last_name: "testing",
                         appointment: "10-12",
@@ -56,7 +56,7 @@ export default {
                         price: "10$"
                     },
                     {
-                        id: 1,
+                        id: 4,
                         first_name: "test",
                         last_name: "testing",
                         appointment: "10-12",
@@ -64,7 +64,7 @@ export default {
                         price: "10$"
                     },
                     {
-                        id: 1,
+                        id: 5,
                         first_name: "test",
                         last_name: "testing",
                         appointment: "10-12",
