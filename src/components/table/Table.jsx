@@ -1,5 +1,4 @@
 import { React, useState, useEffect } from "react";
-import { v4 as uuid } from "uuid";
 
 import Row from "./Row";
 import FormRow from "./FormRow";
@@ -39,7 +38,6 @@ export default (props) => {
 
 
     useEffect(() => {
-        console.log("EFFECT HERE");
         fetchData(name)
             .then((response) => {
                 const parsed = parse(response);

@@ -1,14 +1,23 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import config from "../../config/config";
-import { Outlet, Link } from "react-router-dom";
+import { Outlet, Link, useLocation } from "react-router-dom";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faShieldDog, faHouse } from "@fortawesome/free-solid-svg-icons";
+import { faShieldDog } from "@fortawesome/free-solid-svg-icons";
 
 import "../../styles/navbar.css";
 
 export default function () {
-    const current = window.location.pathname;
+    const pathname = window.location.pathname;
+    const [active, setActive] = useState(pathname);
+
+    const location = useLocation();
+
+    useEffect(() => {
+        const path = location.pathname
+        setActive(path)
+    }, [location]);
+
     return (
         <>
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark py-3">
@@ -25,7 +34,7 @@ export default function () {
                                         <Link to={item.route}
                                             className={
                                                 "nav-link " +
-                                                (current === item.route ? "active" : "")
+                                                (active === item.route ? "active" : "")
                                             }
                                         >
                                             {item.name}

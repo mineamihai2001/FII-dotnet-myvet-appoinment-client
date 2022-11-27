@@ -1,13 +1,11 @@
 import React from "react";
-import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route, createBrowserRouter } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.css";
 import Navbar from "./components/main/Navbar";
 import ErrorBoundary from "./ErrorBoundary";
-import config from "./config/config";
-import MainPanel from "./components/main/MainPanel";
 import Home from "./pages/Home";
-import Dashboard from "./pages/Dashboard";
+import Dashboard from "./pages/Dashboard"; 
+import Error from "./pages/Error"; 
 
 export default function App() {
     return (
@@ -18,6 +16,8 @@ export default function App() {
                     <Routes>
                         <Route path="/" element={<Home />}></Route>
                         <Route path="/dashboard" element={<Dashboard />}></Route>
+                        <Route path="/appointments" element={<Error />}></Route>
+                        <Route path="/account" element={<Error />}></Route>
                     </Routes>
                 </BrowserRouter>
             </ErrorBoundary>

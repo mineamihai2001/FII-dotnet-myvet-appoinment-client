@@ -4,7 +4,6 @@ import { useState } from "react";
 
 const handleChange = (setSelected) => {
     const select = document.getElementById("table-select");
-    console.log(select.value);
     setSelected(select.value)
 };
 
