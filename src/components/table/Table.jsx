@@ -1,39 +1,76 @@
-import { React, useState } from "react";
-import Row from "./Row";
-import "../../styles/table.css";
-import FormRow from "./FormRow";
+import { React, useState, useEffect } from "react";
 import { v4 as uuid } from "uuid";
 
+import Row from "./Row";
+import FormRow from "./FormRow";
+
+import "../../styles/table.css";
+
+import { fetchData } from "../../modules/table.js";
+
+/**
+ * Use to select the data required for the table
+ * @param {Array<Object>} data
+ * @returns
+ */
 const parse = (data) => {
-    return data.map(row => {
+    const keys = Object.keys(data[0]);
+    data = data.map((row) => {
         return {
-            uuid: uuid(),
-            ...row
-        }
+            uuid: row.id,
+            ...row,
+        };
     });
-}
+    return {
+        head: [...keys],
+        body: [...data],
+    };
+};
+
+const submit = (data) => {
+    console.log("here", data);
+};
 
 export default (props) => {
-    const { data } = props;
-    const [tableData, setTableData] = useState(parse(data.body.source));
+    const { name } = props;
+    const [tableData, setTableData] = useState([]);
+    const [headData, setHeadData] = useState([]);
+    const [newRows, setNewRows] = useState([]);
+
+
+    useEffect(() => {
+        console.log("EFFECT HERE");
+        fetchData(name)
+            .then((response) => {
+                const parsed = parse(response);
+                setTableData(parsed.body);
+                setHeadData(parsed.head);
+            })
+            .catch((err) => console.log(err));
+    }, [name]);
 
     const handleNewTableData = (newData) => {
         tableData.push(newData);
         setTableData([...tableData]);
+        newRows.push(newData);
+        setNewRows([...newRows]);
     };
 
     const handleDeleteTableData = (row) => {
-        const copy = tableData.filter(r => r.uuid !== row.uuid);
+        const copy = tableData.filter((r) => r.uuid !== row.uuid);
         setTableData([...copy]);
-    }
+        const _copy = newRows.filter((r) => r.uuid !== row.uuid);
+        setNewRows([..._copy]);
+    };
 
     return (
         <>
+            <h1>{name}</h1>
             <div id="data">
                 <table className="table table-hover">
                     <thead className="table-dark">
                         <tr>
-                            {data.head.map((cell) => {
+                            {headData.map((cell) => {
                                 return <th scope="col">{cell}</th>;
                             })}
                             <th></th>
@@ -41,9 +78,9 @@ export default (props) => {
                     </thead>
                     <tbody className="">
                         {tableData.map((row) => {
-                            return <Row data={row} handler={handleDeleteTableData}/>;
+                            return <Row data={row} handler={handleDeleteTableData} />;
                         })}
-                        <FormRow inputs={data.head} handler={handleNewTableData} />
+                        <FormRow inputs={headData} handler={handleNewTableData} />
                     </tbody>
                 </table>
                 <div id="bottom">
@@ -51,6 +88,7 @@ export default (props) => {
                         id="form-submit"
                         type="button"
                         className="btn btn-outline-secondary w-25 fs-5"
+                        onClick={() => submit(newRows)}
                     >
                         Submit
                     </button>

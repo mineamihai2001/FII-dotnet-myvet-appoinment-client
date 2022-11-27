@@ -12,7 +12,6 @@ const add = (handler) => {
     for (const input of inputs) {
         input.classList.remove("border-danger", "border-5");
         if (input.value === "" || typeof input.value === "undefined") {
-            console.log("@@@", input.value);
             input.classList.add("border-danger", "border-5");
             fail = true;
         }
@@ -35,7 +34,6 @@ const resetInputs = () => {
     const inputs = document.getElementsByClassName("row-form-input");
     for (const input of inputs) {
         input.addEventListener("change", () => {
-            console.log("inputs");
             input.classList.remove("border-danger", "border-5");
         });
     }

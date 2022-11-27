@@ -1,5 +1,6 @@
 import React from "react";
 import config from "../../config/config";
+import { Outlet, Link } from "react-router-dom";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShieldDog, faHouse } from "@fortawesome/free-solid-svg-icons";
@@ -21,15 +22,14 @@ export default function () {
                             {config.navbar.items.map((item) => {
                                 return (
                                     <li className="nav-item">
-                                        <a
+                                        <Link to={item.route}
                                             className={
                                                 "nav-link " +
                                                 (current === item.route ? "active" : "")
                                             }
-                                            href={item.href}
                                         >
                                             {item.name}
-                                        </a>
+                                        </Link>
                                     </li>
                                 );
                             })}
