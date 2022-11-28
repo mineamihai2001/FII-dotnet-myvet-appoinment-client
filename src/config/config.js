@@ -1,7 +1,7 @@
 export default {
     __server: {
         domain: "https://localhost:7204",
-        endpoint: "/api"
+        endpoint: "/api",
     },
     navbar: {
         title: "VetAppointment",
@@ -29,5 +29,15 @@ export default {
             },
         ],
     },
-    tables: ["Clients", "Medicine", "Medics"],
+    tables: {
+        Clients: {
+            disabled: ["pets", "billings"],
+        },
+        Medicine: {
+            disabled: []
+        },
+        Medics: {
+            disabled: ["clients", "patients", "appointments"]
+        },
+    },
 };

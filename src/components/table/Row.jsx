@@ -7,7 +7,7 @@ export default (props) => {
     return (
         <>
             <tr id={data.uuid}>
-                {Object.entries(data).map(([key, value]) => {
+                {Object.entries(data).map(([key, value], index) => {
                     if (key !== "uuid") return key === "id" ? <th>#{value}</th> : <td>{value}</td>;
                 })}
                 <td className="d-flex justify-content-center align-items-center">

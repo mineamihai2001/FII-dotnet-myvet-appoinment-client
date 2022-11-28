@@ -5,7 +5,8 @@ import FormRow from "./FormRow";
 
 import "../../styles/table.css";
 
-import { fetchData } from "../../modules/table.js";
+import { fetchData, postData } from "../../modules/table.js";
+import config from "../../config/config.js";
 
 /**
  * Use to select the data required for the table
@@ -14,9 +15,14 @@ import { fetchData } from "../../modules/table.js";
  */
 const parse = (data) => {
     const keys = Object.keys(data[0]);
-    data = data.map((row) => {
-        return {
+    data = data.map((row, index) => {
+        const _copy = {
             uuid: row.id,
+            id: index,
+        };
+        delete row.id;
+        return {
+            ..._copy,
             ...row,
         };
     });
@@ -26,8 +32,40 @@ const parse = (data) => {
     };
 };
 
-const submit = (data) => {
+/**
+ * Makes sure the row cells are in the same order as the head
+ * @param {Array<string>} head
+ * @param {Array<Object>} row
+ */
+const formatRow = (head, row) => {
+    const result = {};
+    head.map((key) => {
+        result[key] = row[key];
+    });
+    return result;
+};
+
+const submit = (name, data) => {
     console.log("here", data);
+    const bodyList = data.map((row) => {
+        const _row = {};
+        Object.entries(row).forEach(([key, value]) => {
+            if (!config.tables[name].disabled.includes(key) && key !== "id" && key !== "uuid") {
+                console.log(key, value);
+                _row[key] = value;
+            }
+        });
+        console.log("_row", _row);
+        return _row;
+    });
+
+    console.log(bodyList);
+
+    bodyList.forEach((body) => {
+        postData(name, body)
+            .then((response) => console.log(response))
+            .catch((err) => console.log("err", console.log(err)));
+    });
 };
 
 export default (props) => {
@@ -35,7 +73,6 @@ export default (props) => {
     const [tableData, setTableData] = useState([]);
     const [headData, setHeadData] = useState([]);
     const [newRows, setNewRows] = useState([]);
-
 
     useEffect(() => {
         fetchData(name)
@@ -69,16 +106,21 @@ export default (props) => {
                     <thead className="table-dark">
                         <tr>
                             {headData.map((cell) => {
-                                return <th scope="col">{cell}</th>;
+                                return (
+                                    <th scope="col">
+                                        {cell.charAt(0).toUpperCase() + cell.slice(1)}
+                                    </th>
+                                );
                             })}
                             <th></th>
                         </tr>
                     </thead>
                     <tbody className="">
-                        {tableData.map((row) => {
-                            return <Row data={row} handler={handleDeleteTableData} />;
+                        {tableData.map((row, index) => {
+                            row = formatRow(headData, row);
+                            return <Row key={index} data={row} handler={handleDeleteTableData} />;
                         })}
-                        <FormRow inputs={headData} handler={handleNewTableData} />
+                        <FormRow name={name} inputs={headData} handler={handleNewTableData} />
                     </tbody>
                 </table>
                 <div id="bottom">
@@ -86,7 +128,7 @@ export default (props) => {
                         id="form-submit"
                         type="button"
                         className="btn btn-outline-secondary w-25 fs-5"
-                        onClick={() => submit(newRows)}
+                        onClick={() => submit(name, newRows)}
                     >
                         Submit
                     </button>

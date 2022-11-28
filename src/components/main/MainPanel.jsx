@@ -21,7 +21,7 @@ export default function () {
                     className="form-select w-25"
                     onChange={() => handleChange(setSelected)}
                 >
-                    {config.tables.map((table) => {
+                    {Object.keys(config.tables).map((table) => {
                         return <option value={table}>{table}</option>;
                     })}
                 </select>

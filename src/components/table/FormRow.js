@@ -1,14 +1,21 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSquarePlus, faSquareMinus } from "@fortawesome/free-solid-svg-icons";
 import { v4 as uuid } from "uuid";
+import config from "../../config/config.js";
 
-const add = (handler) => {
+const add = (name, handler) => {
     const addBtn = document.getElementById("add");
     const formRow = document.getElementById("form-row");
     const inputs = document.getElementsByClassName("row-form-input");
 
-    const formData = { id: "#", uuid: uuid() };
+    const empty = {};
+    config.tables[name].disabled.map((col) => {
+        empty[col] = [];
+    }); // TODO: NOT GOOD!!! (for sending data back to the server)
+
+    const formData = { id: "#", uuid: uuid(), ...empty };
     let fail = false;
+
     for (const input of inputs) {
         input.classList.remove("border-danger", "border-5");
         if (input.value === "" || typeof input.value === "undefined") {
@@ -20,6 +27,7 @@ const add = (handler) => {
     if (fail) return;
 
     resetForm(); // empty the form for the new row
+    console.log("####", formData);
     handler(formData);
 };
 
@@ -40,7 +48,7 @@ const resetInputs = () => {
 };
 
 export default (props) => {
-    const { inputs, handler } = props;
+    const { name, inputs, handler } = props;
 
     resetInputs();
     return (
@@ -51,15 +59,21 @@ export default (props) => {
                     return (
                         <td scope="col">
                             <input
-                                id={cell.replaceAll(" ", "_").toLowerCase()}
-                                className="form-control w-75 row-form-input"
+                                id={config.tables[name].disabled.includes(cell) ? "" : cell}
+                                className={
+                                    "form-control w-75 " +
+                                    (config.tables[name].disabled.includes(cell)
+                                        ? ""
+                                        : " row-form-input")
+                                }
+                                disabled={config.tables[name].disabled.includes(cell) ? true : ""}
                                 placeholder={cell}
                             />
                         </td>
                     );
                 })}
                 <td className="d-flex justify-content-center align-items-center">
-                    <a id="add" style={{ cursor: "pointer" }} onClick={() => add(handler)}>
+                    <a id="add" style={{ cursor: "pointer" }} onClick={() => add(name, handler)}>
                         <FontAwesomeIcon icon={faSquarePlus} className="text-success" size="xl" />
                     </a>
                 </td>
