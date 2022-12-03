@@ -3,7 +3,6 @@ import { faSquarePlus, faSquareMinus } from "@fortawesome/free-solid-svg-icons";
 
 export default (props) => {
     const { data, handler } = props;
-
     return (
         <>
             <tr id={data.uuid}>

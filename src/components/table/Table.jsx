@@ -1,12 +1,14 @@
 import { React, useState, useEffect } from "react";
+import { faCircleExclamation } from "@fortawesome/free-solid-svg-icons";
 
 import Row from "./Row";
 import FormRow from "./FormRow";
 
 import "../../styles/table.css";
 
-import { fetchData, postData } from "../../modules/table.js";
+import { fetchData, postData, deleteData } from "../../modules/table.js";
 import config from "../../config/config.js";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 /**
  * Use to select the data required for the table
@@ -42,11 +44,20 @@ const formatRow = (head, row) => {
     head.map((key) => {
         result[key] = row[key];
     });
-    return result;
+    return {
+        uuid: row.uuid,
+        ...result,
+    };
 };
 
-const submit = (name, data) => {
-    console.log("here", data);
+/**
+ * Add each new row to the DB once the submit is made
+ * TODO: make a route for posting a list of rows
+ * @param {string} name Table Name
+ * @param {Array<Object>} data Array of newly added rows
+ */
+const submit = (name, data, deletedRows) => {
+    // TODO: implement DELETE !!
     const bodyList = data.map((row) => {
         const _row = {};
         Object.entries(row).forEach(([key, value]) => {
@@ -55,7 +66,7 @@ const submit = (name, data) => {
                 _row[key] = value;
             }
         });
-        console.log("_row", _row);
+        // console.log("_row", _row);
         return _row;
     });
 
@@ -64,8 +75,26 @@ const submit = (name, data) => {
     bodyList.forEach((body) => {
         postData(name, body)
             .then((response) => console.log(response))
-            .catch((err) => console.log("err", console.log(err)));
+            .catch((err) => console.log("[POST ERROR] - ", err));
     });
+
+    deletedRows.forEach((row) => {
+        deleteData(name, row.uuid)
+            .then((response) => console.log(response))
+            .catch((err) => console.log("[DELETE ERROR] - ", err));
+    });
+
+    hideAlert();
+};
+
+const showAlert = () => {
+    const alert = document.getElementById("alert");
+    alert.classList.remove("d-none");
+};
+
+const hideAlert = () => {
+    const alert = document.getElementById("alert");
+    alert.classList.add("d-none");
 };
 
 export default (props) => {
@@ -73,6 +102,7 @@ export default (props) => {
     const [tableData, setTableData] = useState([]);
     const [headData, setHeadData] = useState([]);
     const [newRows, setNewRows] = useState([]);
+    const [deletedRows, setDeletedRows] = useState([]);
 
     useEffect(() => {
         fetchData(name)
@@ -89,6 +119,7 @@ export default (props) => {
         setTableData([...tableData]);
         newRows.push(newData);
         setNewRows([...newRows]);
+        showAlert();
     };
 
     const handleDeleteTableData = (row) => {
@@ -96,11 +127,23 @@ export default (props) => {
         setTableData([...copy]);
         const _copy = newRows.filter((r) => r.uuid !== row.uuid);
         setNewRows([..._copy]);
+        setDeletedRows([...deletedRows, row]);
+        showAlert();
     };
 
     return (
         <>
-            <h1>{name}</h1>
+            <div id="header" className="my-3">
+                <h1 className="d-inline">{name}</h1>
+                <div id="alert" className="d-inline d-none px-3">
+                    Changes not submitted
+                    <FontAwesomeIcon
+                        icon={faCircleExclamation}
+                        className="px-2 text-danger"
+                        size="xl"
+                    />
+                </div>
+            </div>
             <div id="data">
                 <table className="table table-hover">
                     <thead className="table-dark">
@@ -128,7 +171,7 @@ export default (props) => {
                         id="form-submit"
                         type="button"
                         className="btn btn-outline-secondary w-25 fs-5"
-                        onClick={() => submit(name, newRows)}
+                        onClick={() => submit(name, newRows, deletedRows)}
                     >
                         Submit
                     </button>

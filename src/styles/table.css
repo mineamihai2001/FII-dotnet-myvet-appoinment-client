@@ -1,8 +1,8 @@
-#data{
+#data {
     position: relative;
 }
 
-#add-btn{
+#add-btn {
     position: absolute;
     right: 0;
 }
@@ -14,6 +14,5 @@
     padding: 1.5rem 0;
 }
 
-#form-submit{
-    
+#form-submit {
 }
