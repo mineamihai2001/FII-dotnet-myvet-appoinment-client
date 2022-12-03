@@ -41,7 +41,7 @@ const parse = (data) => {
  */
 const formatRow = (head, row) => {
     const result = {};
-    head.map((key) => {
+    head.forEach((key) => {
         result[key] = row[key];
     });
     return {
