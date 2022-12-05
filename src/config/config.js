@@ -31,7 +31,7 @@ export default {
     },
     tables: {
         Clients: {
-            disabled: ["pets", "billings"],
+            disabled: ["pets", "billings", "medicId"],
         },
         Medicine: {
             disabled: []

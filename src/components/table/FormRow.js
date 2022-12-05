@@ -11,7 +11,7 @@ const add = (name, handler) => {
     const empty = {};
     config.tables[name].disabled.map((col) => {
         empty[col] = [];
-    }); // TODO: NOT GOOD!!! (for sending data back to the server)
+    }); // TODO: NOT GOOD (for sending data back to the server)
 
     const formData = { id: "#", uuid: uuid(), ...empty };
     let fail = false;
@@ -72,9 +72,9 @@ export default (props) => {
                         </td>
                     );
                 })}
-                <td className="d-flex justify-content-center align-items-center">
+                <td className="align-middle justify-content-center">
                     <a id="add" style={{ cursor: "pointer" }} onClick={() => add(name, handler)}>
-                        <FontAwesomeIcon icon={faSquarePlus} className="text-success" size="xl" />
+                        <FontAwesomeIcon icon={faSquarePlus} className="text-dark" size="xl" />
                     </a>
                 </td>
             </tr>

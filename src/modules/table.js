@@ -10,7 +10,7 @@ export function fetchData(type) {
     return fetch(url, {
         method: "GET",
         headers: {
-            // "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Origin": "*",
             "Content-Type": "application/json",
         },
     }).then((response) => response.json());
@@ -28,7 +28,7 @@ export function postData(type, data) {
         method: "POST",
         body: JSON.stringify(data),
         headers: {
-            // "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Origin": "*",
             "Content-Type": "application/json",
         },
     }).then((response) => response.json());
@@ -45,7 +45,25 @@ export function deleteData(type, uuid) {
     return fetch(url, {
         method: "DELETE",
         headers: {
-            // "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Origin": "*",
+            "Content-Type": "application/json",
+        },
+    }).then((response) => response.json());
+}
+
+/**
+ * Update a entity
+ * @param {string} type Table Name
+ * @param {Object} row DB Entity
+ * @returns {Promise<Object>} fetch response
+ */
+export function updateData(type, row) {
+    const url = `${config.__server.domain}${config.__server.endpoint}/${type}`;
+    return fetch(url, {
+        method: "PUT",
+        body: JSON.stringify(row),
+        headers: {
+            "Access-Control-Allow-Origin": "*",
             "Content-Type": "application/json",
         },
     }).then((response) => response.json());

@@ -16,3 +16,10 @@
 
 #form-submit {
 }
+
+.edit {
+    color: #6c757d;
+}
+.btn-outline-secondary:hover > .edit{
+    color: white;
+}

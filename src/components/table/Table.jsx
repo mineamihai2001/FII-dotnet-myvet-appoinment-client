@@ -6,7 +6,7 @@ import FormRow from "./FormRow";
 
 import "../../styles/table.css";
 
-import { fetchData, postData, deleteData } from "../../modules/table.js";
+import { fetchData, postData, deleteData, updateData } from "../../modules/table.js";
 import config from "../../config/config.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -56,9 +56,8 @@ const formatRow = (head, row) => {
  * @param {string} name Table Name
  * @param {Array<Object>} data Array of newly added rows
  */
-const submit = (name, data, deletedRows) => {
-    // TODO: implement DELETE !!
-    const bodyList = data.map((row) => {
+const submit = (name, newRows, deletedRows, updatedRows) => {
+    const bodyList = newRows.map((row) => {
         const _row = {};
         Object.entries(row).forEach(([key, value]) => {
             if (!config.tables[name].disabled.includes(key) && key !== "id" && key !== "uuid") {
@@ -66,22 +65,30 @@ const submit = (name, data, deletedRows) => {
                 _row[key] = value;
             }
         });
-        // console.log("_row", _row);
         return _row;
     });
 
-    console.log(bodyList);
-
+    // Create
     bodyList.forEach((body) => {
         postData(name, body)
             .then((response) => console.log(response))
             .catch((err) => console.log("[POST ERROR] - ", err));
     });
 
+    // Delete
     deletedRows.forEach((row) => {
         deleteData(name, row.uuid)
             .then((response) => console.log(response))
             .catch((err) => console.log("[DELETE ERROR] - ", err));
+    });
+
+    // Update
+    updatedRows.forEach((entity) => {
+        entity.id = entity.uuid;
+        delete entity.uuid;
+        updateData(name, entity)
+            .then((response) => console.log(response))
+            .catch((err) => console.log("[PUT ERROR] - ", err));
     });
 
     hideAlert();
@@ -99,10 +106,11 @@ const hideAlert = () => {
 
 export default (props) => {
     const { name } = props;
-    const [tableData, setTableData] = useState([]);
     const [headData, setHeadData] = useState([]);
-    const [newRows, setNewRows] = useState([]);
-    const [deletedRows, setDeletedRows] = useState([]);
+    const [newRows, setNewRows] = useState([]); // Create
+    const [tableData, setTableData] = useState([]); // Read
+    const [updatedRows, setUpdatedRows] = useState([]); // Update
+    const [deletedRows, setDeletedRows] = useState([]); // Delete
 
     useEffect(() => {
         fetchData(name)
@@ -130,6 +138,19 @@ export default (props) => {
         setDeletedRows([...deletedRows, row]);
         showAlert();
     };
+
+    const handleUpdateTableData = (row) => {
+        const newTableData = tableData.map((r) => {
+            return row.uuid === r.uuid ? row : r;
+        });
+        setTableData([...newTableData]);
+        const copy = updatedRows;
+        copy.push(row);
+        setUpdatedRows([...copy]);
+        showAlert();
+    };
+
+    console.log(tableData);
 
     return (
         <>
@@ -161,7 +182,15 @@ export default (props) => {
                     <tbody className="">
                         {tableData.map((row, index) => {
                             row = formatRow(headData, row);
-                            return <Row key={index} data={row} handler={handleDeleteTableData} />;
+                            return (
+                                <Row
+                                    key={index}
+                                    name={name}
+                                    data={row}
+                                    deleteHandler={handleDeleteTableData}
+                                    updateHandler={handleUpdateTableData}
+                                />
+                            );
                         })}
                         <FormRow name={name} inputs={headData} handler={handleNewTableData} />
                     </tbody>
@@ -170,8 +199,8 @@ export default (props) => {
                     <button
                         id="form-submit"
                         type="button"
-                        className="btn btn-outline-secondary w-25 fs-5"
-                        onClick={() => submit(name, newRows, deletedRows)}
+                        className="btn btn-outline-secondary w-25 fs-4 fw-bolder"
+                        onClick={() => submit(name, newRows, deletedRows, updatedRows)}
                     >
                         Submit
                     </button>
