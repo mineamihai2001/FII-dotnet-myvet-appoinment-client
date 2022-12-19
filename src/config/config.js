@@ -39,5 +39,14 @@ export default {
         Medics: {
             disabled: ["clients", "patients", "appointments"]
         },
+        Rooms: {
+            disabled: ['appointments']
+        },
+        Appointments: {
+            disabled: []
+        },
+        Bills: {
+            disabled: []
+        }
     },
 };

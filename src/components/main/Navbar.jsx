@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import config from "../../config/config";
 import { Outlet, Link, useLocation } from "react-router-dom";
 
@@ -14,8 +14,8 @@ export default function () {
     const location = useLocation();
 
     useEffect(() => {
-        const path = location.pathname
-        setActive(path)
+        const path = location.pathname;
+        setActive(path);
     }, [location]);
 
     return (
@@ -31,7 +31,8 @@ export default function () {
                             {config.navbar.items.map((item) => {
                                 return (
                                     <li className="nav-item">
-                                        <Link to={item.route}
+                                        <Link
+                                            to={item.route}
                                             className={
                                                 "nav-link " +
                                                 (active === item.route ? "active" : "")
@@ -54,6 +55,9 @@ export default function () {
                                 Search
                             </button>
                         </form>
+                        <Link to="/login" className="btn btn-outline-secondary ms-3">
+                            Logout
+                        </Link>
                     </div>
                 </div>
             </nav>

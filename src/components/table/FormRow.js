@@ -27,7 +27,6 @@ const add = (name, handler) => {
     if (fail) return;
 
     resetForm(); // empty the form for the new row
-    console.log("####", formData);
     handler(formData);
 };
 
@@ -55,7 +54,8 @@ export default (props) => {
         <>
             <tr id="form-row">
                 {inputs.map((cell, index) => {
-                    if (index === 0) return <th className="d-flex justify-content-center">#</th>;
+                    if (index === 0)
+                        return <th className="align-middle justify-content-center">#</th>;
                     return (
                         <td scope="col">
                             <input

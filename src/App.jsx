@@ -4,18 +4,24 @@ import "bootstrap/dist/css/bootstrap.css";
 import Navbar from "./components/main/Navbar";
 import ErrorBoundary from "./ErrorBoundary";
 import { Home, Dashboard, Appointments, Error } from "./pages";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import { Layout } from "./pages/Layout";
 
 export default function App() {
     return (
         <>
             <ErrorBoundary>
                 <BrowserRouter>
-                    <Navbar />
                     <Routes>
-                        <Route path="/" element={<Home />}></Route>
-                        <Route path="/dashboard" element={<Dashboard />}></Route>
-                        <Route path="/appointments" element={<Appointments />}></Route>
-                        <Route path="/account" element={<Error />}></Route>
+                        <Route path="/" element={<Layout />}>
+                            <Route index element={<Home />}></Route>
+                            <Route path="/dashboard" element={<Dashboard />}></Route>
+                            <Route path="/appointments" element={<Appointments />}></Route>
+                            <Route path="/account" element={<Error />}></Route>
+                        </Route>
+                        <Route path="/login" element={<Login />}></Route>
+                        <Route path="/register" element={<Register />}></Route>
                     </Routes>
                 </BrowserRouter>
             </ErrorBoundary>

@@ -7,6 +7,7 @@ import {
     faSquareCheck,
 } from "@fortawesome/free-solid-svg-icons";
 import config from "../../config/config.js";
+import { updateData } from "../../modules/table.js";
 
 /**
  * Edit Row handler (show | hide)
@@ -36,8 +37,22 @@ const confirmEdit = (name, initialData, updateHandler) => {
         initialData[key] = input?.value;
     });
 
-    updateHandler(initialData);
-    editRow(initialData.uuid);
+    // updateHandler(initialData);
+
+    const ID = initialData.uuid;
+    let entity = initialData;
+    entity.id = entity.uuid;
+    delete entity.uuid;
+    updateData(name, entity)
+        .then((response) => {
+            console.log(response);
+            editRow(ID); // toggle the row back to view mode
+        })
+        .catch((err) => {
+            console.log("err", err)
+            editRow(ID); // toggle the row back to view mode
+        });
+
 };
 
 export default (props) => {

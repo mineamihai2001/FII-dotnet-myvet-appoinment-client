@@ -4,7 +4,7 @@ import { useState } from "react";
 
 const handleChange = (setSelected) => {
     const select = document.getElementById("table-select");
-    setSelected(select.value)
+    setSelected(select.value);
 };
 
 export default function () {
@@ -13,8 +13,8 @@ export default function () {
     return (
         <>
             <div id="header" className="d-flex justify-content-center align-content-center mt-5">
-                <label className="form-tex d-flex justify-content-center align-items-center fw-semibold pe-3">
-                    Select data source:{" "}
+                <label className="form-tex d-flex justify-content-center align-items-center fw-semibold pe-3 fs-5">
+                    Select data source:
                 </label>
                 <select
                     id="table-select"

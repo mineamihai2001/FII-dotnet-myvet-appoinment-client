@@ -52,7 +52,6 @@ const formatRow = (head, row) => {
 
 /**
  * Add each new row to the DB once the submit is made
- * TODO: make a route for posting a list of rows
  * @param {string} name Table Name
  * @param {Array<Object>} data Array of newly added rows
  */
