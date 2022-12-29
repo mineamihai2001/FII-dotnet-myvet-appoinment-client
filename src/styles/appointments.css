@@ -1,0 +1,20 @@
+#create-appointment {
+    transition: ease-in-out 50ms;
+}
+#create-appointment:hover {
+    transform: scale(1.1);
+}
+.delete-app {
+    transition: ease-in-out 50ms;
+}
+.delete-app:hover {
+    transform: scale(1.1);
+}
+
+.appointment-card{
+    transition: ease-in-out 65ms;
+}
+
+.appointment-card:hover{
+    border-color: gray !important;
+}

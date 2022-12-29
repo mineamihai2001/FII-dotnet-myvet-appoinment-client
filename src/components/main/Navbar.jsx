@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import config from "../../config/config";
-import { Outlet, Link, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShieldDog } from "@fortawesome/free-solid-svg-icons";
@@ -35,7 +35,9 @@ export default function () {
                                             to={item.route}
                                             className={
                                                 "nav-link " +
-                                                (active === item.route ? "active" : "")
+                                                (`/${active.split("/")[1]}` === item.route
+                                                    ? "active"
+                                                    : "")
                                             }
                                         >
                                             {item.name}
@@ -44,17 +46,6 @@ export default function () {
                                 );
                             })}
                         </ul>
-                        <form className="d-flex">
-                            <input
-                                className="form-control me-2"
-                                type="search"
-                                placeholder="Search"
-                                aria-label="Search"
-                            />
-                            <button className="btn btn-outline-light" type="submit">
-                                Search
-                            </button>
-                        </form>
                         <Link to="/login" className="btn btn-outline-secondary ms-3">
                             Logout
                         </Link>

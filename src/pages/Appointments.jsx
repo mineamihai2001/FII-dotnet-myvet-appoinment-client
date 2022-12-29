@@ -1,7 +1,13 @@
+import LeftPane from "../components/appointments/LeftPane";
+import RightPane from "../components/appointments/RightPane";
+
 export default () => {
-    return <>
-        <div className="p-5">
-            <h1>Appointments</h1>
-        </div>
-    </>
-}
+    return (
+        <>
+            <div className="p-5 d-flex">
+                <LeftPane />
+                <RightPane />
+            </div>
+        </>
+    );
+};
