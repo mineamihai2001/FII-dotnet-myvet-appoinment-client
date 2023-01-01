@@ -8,6 +8,10 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import CardDetails from "./components/appointments/CardDetails";
 import Create from "./components/appointments/Create";
+import Account from "./pages/Account";
+import Patients from "./pages/Patients";
+import PatientCardDetails from "./components/patients/PatientCardDetails";
+import PatientCreate from "./components/patients/PatientCreate";
 
 const router = createBrowserRouter([
     {
@@ -37,8 +41,22 @@ const router = createBrowserRouter([
                 ],
             },
             {
+                path: "patients",
+                element: <Patients />,
+                children: [
+                    {
+                        path: ":patientId",
+                        element: <PatientCardDetails />,
+                    },
+                    {
+                        index: true,
+                        element: <PatientCreate />,
+                    },
+                ],
+            },
+            {
                 path: "account",
-                element: <Error />,
+                element: <Account />,
             },
         ],
     },

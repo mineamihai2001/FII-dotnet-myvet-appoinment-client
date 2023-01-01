@@ -23,6 +23,11 @@ export default {
                 route: "/appointments",
             },
             {
+                name: "Patients",
+                icon: "",
+                route: "/patients",
+            },
+            {
                 name: "Account",
                 icon: "",
                 route: "/account",
@@ -34,19 +39,19 @@ export default {
             disabled: ["pets", "billings", "medicId"],
         },
         Medicine: {
-            disabled: []
+            disabled: [],
         },
         Medics: {
-            disabled: ["clients", "patients", "appointments"]
+            disabled: ["clients", "patients", "appointments"],
         },
         Rooms: {
-            disabled: ['appointments']
+            disabled: ["appointments"],
         },
         Appointments: {
-            disabled: []
+            disabled: [],
         },
         Bills: {
-            disabled: []
-        }
+            disabled: [],
+        },
     },
 };

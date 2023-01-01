@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { appointments } from "../../data/mocks";
 import Card from "./Card";
 import { Link } from "react-router-dom";
