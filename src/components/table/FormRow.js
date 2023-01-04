@@ -11,7 +11,7 @@ const add = (name, handler) => {
     const empty = {};
     config.tables[name].disabled.map((col) => {
         empty[col] = [];
-    }); // TODO: NOT GOOD (for sending data back to the server)
+    });
 
     const formData = { id: "#", uuid: uuid(), ...empty };
     let fail = false;

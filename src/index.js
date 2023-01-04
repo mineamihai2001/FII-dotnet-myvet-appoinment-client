@@ -1,17 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
-import Error from "./pages/Error";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import { Appointments, Dashboard, Home } from "./pages";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
-import CardDetails from "./components/appointments/CardDetails";
-import Create from "./components/appointments/Create";
-import Account from "./pages/Account";
-import Patients from "./pages/Patients";
-import PatientCardDetails from "./components/patients/PatientCardDetails";
-import PatientCreate from "./components/patients/PatientCreate";
+import { Appointments, Dashboard, Home, Payment, Login, Register, Clients, Account } from "./pages";
+import { ClientCardDetails, ClientCreate } from "./components/clients";
+import { CardDetails, Create } from "./components/appointments";
 
 const router = createBrowserRouter([
     {
@@ -41,16 +34,16 @@ const router = createBrowserRouter([
                 ],
             },
             {
-                path: "patients",
-                element: <Patients />,
+                path: "clients",
+                element: <Clients />,
                 children: [
                     {
-                        path: ":patientId",
-                        element: <PatientCardDetails />,
+                        path: ":clientId",
+                        element: <ClientCardDetails />,
                     },
                     {
                         index: true,
-                        element: <PatientCreate />,
+                        element: <ClientCreate />,
                     },
                 ],
             },
@@ -67,6 +60,10 @@ const router = createBrowserRouter([
     {
         path: "/register",
         element: <Register />,
+    },
+    {
+        path: "/payment",
+        element: <Payment />,
     },
 ]);
 

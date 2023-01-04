@@ -7,7 +7,7 @@ const formData = {
     end: "text",
     medic: ["Medic1", "Medic2", "Medic3", "Medic4"],
     type: ["Control", "Test", "Operation", "Anaesthesia"],
-    patient: "text",
+    client: "text",
     description: "textarea",
 };
 

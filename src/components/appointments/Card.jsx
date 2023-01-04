@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 const Card = (props) => {
-    const { id, date, start, end, medic, type, patientId } = props;
+    const { id, date, start, end, medic, type, clientId } = props;
 
     // TODO: make more dynamic
     return (
@@ -39,8 +39,8 @@ const Card = (props) => {
                         <span>{type}</span>
                     </div>
                     <div className="d-flex">
-                        <span className="fw-bold me-2">Patient:</span>
-                        <span>{patientId}</span>
+                        <span className="fw-bold me-2">Client:</span>
+                        <span>{clientId}</span>
                     </div>
                 </div>
                 <div id={`delete-${id}`} className="delete-app col-1 d-flex align-items-center">

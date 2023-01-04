@@ -21,7 +21,7 @@ const LeftPane = () => {
                     </div>
                 </div>
             </div>
-            <div className="overflow-scroll p-3 h-50">
+            <div className="overflow-scroll p-3" style={{ height: "80vh" }}>
                 {appointments.map((appointment, index) => {
                     return <Card key={index} id={index} {...appointment} />;
                 })}

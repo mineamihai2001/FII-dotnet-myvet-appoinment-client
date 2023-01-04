@@ -2,5 +2,10 @@ import Home from "./Home";
 import Dashboard from "./Dashboard";
 import Error from "./Error";
 import Appointments from "./Appointments";
+import Payment from "./Payment";
+import Login from "./Login";
+import Register from "./Register";
+import Clients from "./Clients";
+import Account from "./Account";
 
-export { Home, Dashboard, Error, Appointments };
+export { Home, Dashboard, Error, Appointments, Payment, Login, Register, Clients, Account };

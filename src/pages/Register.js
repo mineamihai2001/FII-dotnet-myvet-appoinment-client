@@ -29,7 +29,7 @@ const formConfig = {
     ],
 };
 
-export default () => {
+const Register = () => {
     return (
         <>
             <div
@@ -39,12 +39,12 @@ export default () => {
                 <div id="login-panel" className="w-50 p-5 shadow p-3 mb-5 bg-body rounded">
                     <Form data={formConfig} />
                     <span className="float-end">
-                        <Link to="/login">
-                            Already have an account? Login now.
-                        </Link>
+                        <Link to="/login">Already have an account? Login now.</Link>
                     </span>
                 </div>
             </div>
         </>
     );
 };
+
+export default Register;

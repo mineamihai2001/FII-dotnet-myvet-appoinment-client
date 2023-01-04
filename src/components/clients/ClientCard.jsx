@@ -3,10 +3,9 @@ import "../../styles/appointments.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
-const PatientCard = (props) => {
+const ClientCard = (props) => {
     const { id, data } = props;
 
-    // TODO: make more dynamic
     return (
         <>
             <Link
@@ -26,13 +25,13 @@ const PatientCard = (props) => {
                     </div>
                     <div className="d-flex">
                         <span className="fw-bold me-2">Phone:</span>
-                        <span>{data.phone}</span>
+                        <span>{data.phoneNumber}</span>
                     </div>
                 </div>
                 <div id="app-details" className="ms-auto fs-6 col-5">
                     <div className="d-flex">
                         <span className="fw-bold me-2">Email:</span>
-                        <span>{data.email}</span>
+                        <span>{data.emailAddress}</span>
                     </div>
                     <div className="d-flex">
                         <span className="fw-bold me-2">Address:</span>
@@ -47,4 +46,4 @@ const PatientCard = (props) => {
     );
 };
 
-export default PatientCard;
+export default ClientCard;

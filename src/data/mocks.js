@@ -7,7 +7,7 @@ export const appointments = [
         end: "12:05",
         medic: "Test Medic",
         type: "Test Control",
-        patientId: 12344444, //crypto.randomUUID(),
+        clientId: 12344444, //crypto.randomUUID(),
     },
     {
         date: `${today.getDay()}/${today.getMonth() + 1}/${today.getFullYear()}`,
@@ -15,7 +15,7 @@ export const appointments = [
         end: "12:05",
         medic: "Test Medic",
         type: "Test Control",
-        patientId: 12344444, //crypto.randomUUID(),
+        clientId: 12344444, //crypto.randomUUID(),
     },
     {
         date: `${today.getDay()}/${today.getMonth() + 1}/${today.getFullYear()}`,
@@ -23,7 +23,7 @@ export const appointments = [
         end: "12:05",
         medic: "Test Medic",
         type: "Test Control",
-        patientId: 12344444, //crypto.randomUUID(),
+        clientId: 12344444, //crypto.randomUUID(),
     },
     {
         date: `${today.getDay()}/${today.getMonth() + 1}/${today.getFullYear()}`,
@@ -31,7 +31,7 @@ export const appointments = [
         end: "12:05",
         medic: "Test Medic",
         type: "Test Control",
-        patientId: 12344444, //crypto.randomUUID(),
+        clientId: 12344444, //crypto.randomUUID(),
     },
     {
         date: `${today.getDay()}/${today.getMonth() + 1}/${today.getFullYear()}`,
@@ -39,7 +39,7 @@ export const appointments = [
         end: "12:05",
         medic: "Test Medic",
         type: "Test Control",
-        patientId: 12344444, //crypto.randomUUID(),
+        clientId: 12344444, //crypto.randomUUID(),
     },
     {
         date: `${today.getDay()}/${today.getMonth() + 1}/${today.getFullYear()}`,
@@ -47,7 +47,7 @@ export const appointments = [
         end: "12:05",
         medic: "Test Medic",
         type: "Test Control",
-        patientId: 12344444, //crypto.randomUUID(),
+        clientId: 12344444, //crypto.randomUUID(),
     },
     {
         date: `${today.getDay()}/${today.getMonth() + 1}/${today.getFullYear()}`,
@@ -55,7 +55,7 @@ export const appointments = [
         end: "12:05",
         medic: "Test Medic",
         type: "Test Control",
-        patientId: 12344444, //crypto.randomUUID(),
+        clientId: 12344444, //crypto.randomUUID(),
     },
     {
         date: `${today.getDay()}/${today.getMonth() + 1}/${today.getFullYear()}`,
@@ -63,7 +63,7 @@ export const appointments = [
         end: "12:05",
         medic: "Test Medic",
         type: "Test Control",
-        patientId: 12344444, //crypto.randomUUID(),
+        clientId: 12344444, //crypto.randomUUID(),
     },
     {
         date: `${today.getDay()}/${today.getMonth() + 1}/${today.getFullYear()}`,
@@ -71,12 +71,12 @@ export const appointments = [
         end: "12:05",
         medic: "Test Medic",
         type: "Test Control",
-        patientId: 12344444, //crypto.randomUUID(),
+        clientId: 12344444, //crypto.randomUUID(),
     },
 ];
 
 const PETS = ["Dog", "Cat", "Horse", "Fish", "Snake", "Hamster"];
-export const patients = [
+export const clients = [
     {
         name: "FirstName LastName",
         pet: PETS[Math.floor(Math.random() * PETS.length)],

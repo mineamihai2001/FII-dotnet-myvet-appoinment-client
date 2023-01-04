@@ -23,9 +23,9 @@ export default {
                 route: "/appointments",
             },
             {
-                name: "Patients",
+                name: "Clients",
                 icon: "",
-                route: "/patients",
+                route: "/clients",
             },
             {
                 name: "Account",
@@ -42,7 +42,7 @@ export default {
             disabled: [],
         },
         Medics: {
-            disabled: ["clients", "patients", "appointments"],
+            disabled: ["clients", "clients", "appointments"],
         },
         Rooms: {
             disabled: ["appointments"],
@@ -54,4 +54,7 @@ export default {
             disabled: [],
         },
     },
+    billing: {
+        appointment_price: 10
+    }
 };
