@@ -1,9 +1,10 @@
 import { Outlet } from "react-router-dom";
 
-const RightPane = () => {
+const RightPane = (props) => {
+    const { context } = props;
     return (
         <div className="w-50 ps-3">
-            <Outlet />
+            <Outlet context={context} />
         </div>
     );
 };

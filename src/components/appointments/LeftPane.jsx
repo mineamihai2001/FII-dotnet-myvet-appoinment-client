@@ -1,8 +1,9 @@
-import { appointments } from "../../data/mocks";
 import Card from "./Card";
 import { Link } from "react-router-dom";
 
-const LeftPane = () => {
+const LeftPane = (props) => {
+    const { appointments } = props;
+
     return (
         <div className="w-50">
             <div className="row pe-5 ps-3">

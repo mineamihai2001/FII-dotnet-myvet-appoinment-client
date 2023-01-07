@@ -1,9 +1,6 @@
 import { useState } from "react";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faShieldDog } from "@fortawesome/free-solid-svg-icons";
-
 import config from "../config/config";
 
 const initialOptions = {
@@ -37,15 +34,6 @@ const Payment = (props) => {
 
     return (
         <>
-            <nav className="navbar navbar-expand-lg navbar-dark bg-dark py-3">
-                <div className="d">
-                    <FontAwesomeIcon icon={faShieldDog} color="white" size="xl" className="px-3" />
-                    <a className="navbar-brand" href="#">
-                        {config.navbar.title}
-                    </a>
-                </div>
-            </nav>
-
             <div
                 className="w-100 h-100 d-flex flex-column 
                             justify-content-center align-items-center"

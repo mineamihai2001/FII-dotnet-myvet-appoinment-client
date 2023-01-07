@@ -1,6 +1,6 @@
 const today = new Date();
 
-export const appointments = [
+export const _appointments = [
     {
         date: `${today.getDay()}/${today.getMonth() + 1}/${today.getFullYear()}`,
         start: "11:20",

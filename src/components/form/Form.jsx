@@ -50,10 +50,6 @@ export default (props) => {
                     );
                 })}
                 <div className="mb-3 form-check">
-                    {/* <input type="checkbox" className="form-check-input" id="exampleCheck1" />
-                    <label className="form-check-label" for="exampleCheck1">
-                        Remember me
-                    </label> */}
                 </div>
                 {buttons.map((button) => {
                     return (
@@ -72,7 +68,7 @@ export default (props) => {
                                     )
                                 )
                             }
-                            className="btn btn-primary"
+                            className="btn btn-dark"
                         >
                             {button?.text}
                         </button>

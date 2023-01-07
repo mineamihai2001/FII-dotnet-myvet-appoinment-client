@@ -7,5 +7,6 @@ import Login from "./Login";
 import Register from "./Register";
 import Clients from "./Clients";
 import Account from "./Account";
+import NoAuth from "./NoAuth";
 
-export { Home, Dashboard, Error, Appointments, Payment, Login, Register, Clients, Account };
+export { Home, Dashboard, Error, Appointments, Payment, Login, Register, Clients, Account, NoAuth };

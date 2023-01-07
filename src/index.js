@@ -2,7 +2,17 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import { Appointments, Dashboard, Home, Payment, Login, Register, Clients, Account } from "./pages";
+import {
+    Appointments,
+    Dashboard,
+    Home,
+    Payment,
+    Login,
+    Register,
+    Clients,
+    Account,
+    NoAuth,
+} from "./pages";
 import { ClientCardDetails, ClientCreate } from "./components/clients";
 import { CardDetails, Create } from "./components/appointments";
 
@@ -55,15 +65,33 @@ const router = createBrowserRouter([
     },
     {
         path: "/login",
-        element: <Login />,
+        element: <NoAuth />,
+        children: [
+            {
+                index: true,
+                element: <Login />,
+            },
+        ],
     },
     {
         path: "/register",
-        element: <Register />,
+        element: <NoAuth />,
+        children: [
+            {
+                index: true,
+                element: <Register />,
+            },
+        ],
     },
     {
         path: "/payment",
-        element: <Payment />,
+        element: <NoAuth />,
+        children: [
+            {
+                index: true,
+                element: <Payment />,
+            },
+        ],
     },
 ]);
 

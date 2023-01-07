@@ -1,15 +1,7 @@
 import AccountForm from "../components/account/AccountForm";
 import SampleProfile from "../assets/sample_profile.jpg";
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
 import config from "../config/config";
-
-const personalForm = {
-    fullName: "Nume Prenume",
-    email: "email@email.com",
-    address: "Iasi, Iasi RO 700700",
-    phone: "0788888888",
-};
 
 const employmentForm = {
     employeeId: crypto.randomUUID(),

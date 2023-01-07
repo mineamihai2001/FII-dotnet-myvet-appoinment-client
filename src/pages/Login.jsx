@@ -1,51 +1,35 @@
-import { Link } from "react-router-dom";
+import { Link, redirect, useNavigate } from "react-router-dom";
 import Form from "../components/form/Form";
 import "../styles/login.css";
 import { login } from "../modules/auth";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
 
-const actionLogin = (valid, entries) => {
-    if (!valid) return;
-    const { email, password } = entries;
-    login(email, password)
-        .then((response) => {
-            console.log(response);
-            if (response?.status == "success") {
-                localStorage.setItem("token", response.token);
-                window.location.replace("http://localhost:3000/");
-                return;
-            }
-        })
-        .catch((err) => {
-            console.log("err", err);
+const Login = () => {
+    const [email, setEmail] = useState();
+    const [password, setPassword] = useState();
+    const navigate = useNavigate();
+
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm();
+
+    const onCompleted = () => {
+        console.log({
+            email,
+            password,
         });
-};
 
-const formConfig = {
-    title: "Login",
-    inputs: [
-        {
-            label: "Email address",
-            type: "email",
-            id: "email",
-            mandatory: true,
-        },
-        {
-            label: "Password",
-            type: "password",
-            id: "password",
-            mandatory: true,
-        },
-    ],
-    buttons: [
-        {
-            text: "Submit",
-            type: "button",
-        },
-    ],
-    action: actionLogin,
-};
+        return navigate("/"); // TODO: fetch response
 
-export default () => {
+        return {
+            email,
+            password,
+        };
+    };
+
     return (
         <>
             <div
@@ -53,7 +37,36 @@ export default () => {
                         align-items-center flex-column h-100"
             >
                 <div id="login-panel" className="w-50 p-5 shadow p-3 mb-5 bg-body rounded">
-                    <Form data={formConfig} />
+                    <h3>Login</h3>
+                    <form onSubmit={handleSubmit(onCompleted)}>
+                        <div className="mb-3">
+                            <label for="email" className="form-label">
+                                Email
+                            </label>
+                            <input
+                                {...register("email", { required: true })}
+                                onChange={(e) => setEmail(e.target.value)}
+                                id="email"
+                                type="email"
+                                className="form-control"
+                            />
+                        </div>
+                        <div className="mb-3">
+                            <label for="password" className="form-label">
+                                Password
+                            </label>
+                            <input
+                                {...register("password", { required: true })}
+                                onChange={(e) => setPassword(e.target.value)}
+                                id="password"
+                                type="password"
+                                className="form-control"
+                            />
+                        </div>
+                        <button type="submit" className="btn btn-dark">
+                            Login
+                        </button>
+                    </form>
                     <span className="float-end">
                         <Link to="/register">Don't have an account? Register now.</Link>
                     </span>
@@ -62,3 +75,5 @@ export default () => {
         </>
     );
 };
+
+export default Login;
