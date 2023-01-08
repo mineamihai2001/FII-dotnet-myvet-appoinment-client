@@ -1,31 +1,54 @@
-import Dog from "../assets/dog.jpg";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Vet from "../assets/vet-home.jpg";
 import "../styles/home.css";
+import { faCircleCheck } from "@fortawesome/free-regular-svg-icons";
+import { Link } from "react-router-dom";
 
 const Home = () => {
     return (
         <>
-            <div className="">
-                <div className="bg-secondary px-5">
-                    <div className="row py-5 mb-2">
-                        <h1 className="col-10">VetAppointment</h1>
+            <div className="h-100 d-flex align-items-center">
+                <div className="h-75 w-100 d-flex" style={{ background: "#fafbfd" }}>
+                    <div className="col-5 d-flex justify-content-center align-items-center">
+                        <img src={Vet} className="h-75" />
                     </div>
-                    <div className="row pb-5">
-                        <div className="col-4 p-5 bg-dark text-white h-75">
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sit
-                                amet fermentum leo. Mauris gravida mi sit amet velit maximus varius.
-                                Donec varius vitae turpis a sodales. Morbi lobortis sodales nulla et
-                                semper.
-                            </p>
-                            <button className="btn btn-danger mt-4">Take me there</button>
-                        </div>
-                        <div className="col d-flex justify-content-center align-items-center">
-                            <img src={Dog} className="w-75 opacity-75 "></img>
+                    <div className="col d-flex justify-content-start align-items-center">
+                        <div>
+                            <div>
+                                <span className="fs-1 fw-bolder text-purple">VetAppointment</span>
+                                <span className="fs-3 fw-bold ms-4"> Your clinic's best agenda</span>
+                            </div>
+                            <div>
+                                <div className="d-flex my-5 fw-semibold">
+                                    <FontAwesomeIcon
+                                        icon={faCircleCheck}
+                                        className="text-green me-5"
+                                        size="3x"
+                                    />
+                                    <span className="fs-3">Create appointments on the spot</span>
+                                </div>
+                                <div className="d-flex my-5 fw-semibold">
+                                    <FontAwesomeIcon
+                                        icon={faCircleCheck}
+                                        className="text-green me-5"
+                                        size="3x"
+                                    />
+                                    <span className="fs-3">Manage your clients</span>
+                                </div>
+                                <div className="d-flex my-5 fw-semibold">
+                                    <FontAwesomeIcon
+                                        icon={faCircleCheck}
+                                        className="text-green me-5"
+                                        size="3x"
+                                    />
+                                    <span className="fs-3">Billing options integrated</span>
+                                </div>
+                            </div>
+                            <Link to="/dashboard" className="btn btn-purple px-5 fs-5">Start now</Link>
                         </div>
                     </div>
                 </div>
             </div>
-            <div className="fs-3">Under construction...</div>
         </>
     );
 };

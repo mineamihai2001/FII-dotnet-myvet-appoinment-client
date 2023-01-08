@@ -1,0 +1,17 @@
+.text-purple {
+    color: #b66eae;
+}
+
+.text-green {
+    color: #5aa481;
+}
+
+.btn-purple {
+    color: white;
+    background-color: #b66eae;
+}
+
+.btn-purple:hover{
+    color: #b66eae;
+    outline: 2px solid #b66eae;
+}
