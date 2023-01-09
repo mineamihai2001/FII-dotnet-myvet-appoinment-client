@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useCallback, useEffect, useState } from "react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import {
     Appointments,
@@ -16,14 +16,14 @@ import { CardDetails, Create } from "./components/appointments";
 import Protected from "./utils/Protected";
 
 const Root = () => {
-    const [user, setUser] = useState(true); // TODO: get state from localStorage
+    const [user, setUser] = useState(false); // TODO: get state from localStorage
 
     const router = createBrowserRouter([
         {
             path: "/",
             element: <Protected context={[user, setUser]} />,
             children: [
-            {
+                {
                     index: true,
                     element: <Home />,
                 },

@@ -1,16 +1,16 @@
-import { Link, redirect, useNavigate } from "react-router-dom";
-import Form from "../components/form/Form";
+import { Link, useNavigate } from "react-router-dom";
 import "../styles/login.css";
-import { login } from "../modules/auth";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Input } from "../components/form/Input";
 import config from "../config/config";
+import { useStorage } from "../hooks/useStorage";
 
 const Login = ({ context: [user, setUser] }) => {
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
     const [error, setError] = useState("");
+
+    const [storage, setStorage] = useStorage("user");
 
     const navigate = useNavigate();
 
@@ -40,12 +40,18 @@ const Login = ({ context: [user, setUser] }) => {
                     setError(response?.body);
                     return;
                 }
+                setStorage(response);
                 setUser(true);
-                navigate("/");
                 return;
             })
             .catch((err) => console.log("err", err));
     };
+
+    useEffect(() => {
+        if (user) {
+            navigate("/");
+        }
+    }, [user]);
 
     return (
         <>
@@ -54,7 +60,7 @@ const Login = ({ context: [user, setUser] }) => {
                         align-items-center flex-column h-100"
             >
                 <div id="login-panel" className="w-50 p-5 shadow p-3 mb-5 bg-body rounded">
-                    <h3>Login</h3>
+                    <h3>Login {user?.toString()}</h3>
                     <span className="text-danger">{error}</span>
                     <form onSubmit={handleSubmit(onCompleted)}>
                         <div className="mb-3">

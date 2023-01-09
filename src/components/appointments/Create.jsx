@@ -4,6 +4,7 @@ import { fetchData, postData } from "../../modules/table";
 import { useOutletContext } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { useStorage } from "../../hooks/useStorage";
 
 const Create = () => {
     const [appointments, setAppointments] = useOutletContext();
@@ -19,6 +20,8 @@ const Create = () => {
     const [error, setError] = useState("");
     const [success, setSuccess] = useState("");
 
+    const [storage, setStorage] = useStorage("user");
+
     const {
         register,
         handleSubmit,
@@ -27,23 +30,24 @@ const Create = () => {
 
     useEffect(() => {
         fetchData("Clients").then((response) => setClients(response));
+        console.log(storage);
     }, []);
 
     const onCompleted = () => {
         setError("");
         setSuccess("");
 
-        const medicId = "329701c7-d238-47f6-9733-ea9024f814d8"; // TODO: get current id
+        const medicId = storage?.medicId;
         const data = {
-            medic: medicId,
+            medicId,
             startDate,
             endDate,
             type,
-            patient,
+            clientId: patient,
             description,
         };
-        console.log(data);
 
+        
         postData("Appointments", data).then((response) => {
             console.log(response);
             if (typeof response[0]?.errorMessage !== "undefined") {
@@ -120,7 +124,7 @@ const Create = () => {
                         >
                             <option defaultValue={"Please select"}>Please select</option>
                             {clients.map((client) => {
-                                return <option value={client?.name}>{client?.name}</option>;
+                                return <option value={client?.id}>{client?.name}</option>;
                             })}
                         </select>
                     </div>

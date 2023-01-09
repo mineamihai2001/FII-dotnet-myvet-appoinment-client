@@ -6,10 +6,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShieldDog } from "@fortawesome/free-solid-svg-icons";
 
 import "../../styles/navbar.css";
+import { useStorage } from "../../hooks/useStorage";
 
-export default function () {
+export default function ({ context: [user, setUser] }) {
     const pathname = window.location.pathname;
     const [active, setActive] = useState(pathname);
+    const [storage, setStorage] = useStorage("user");
 
     const location = useLocation();
 
@@ -46,7 +48,14 @@ export default function () {
                                 );
                             })}
                         </ul>
-                        <Link to="/login" className="btn btn-outline-secondary ms-3">
+                        <Link
+                            to="/login"
+                            className="btn btn-outline-secondary ms-3"
+                            onClick={() => {
+                                setUser(false);
+                                setStorage({}); // empty the localStorage
+                            }}
+                        >
                             Logout
                         </Link>
                     </div>

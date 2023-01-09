@@ -6,6 +6,10 @@
     color: #5aa481;
 }
 
+.text-red {
+    color: #ae444f;
+}
+
 .btn-purple {
     color: white;
     background-color: #b66eae;
@@ -14,4 +18,16 @@
 .btn-purple:hover{
     color: #b66eae;
     outline: 2px solid #b66eae;
+}
+
+.bg-red{
+    background-color: #ffcdd2;
+}
+
+.bg-green{
+    color: #b4ffdc;
+}
+
+.border-red {
+    border-color: #ffabb3 !important;
 }

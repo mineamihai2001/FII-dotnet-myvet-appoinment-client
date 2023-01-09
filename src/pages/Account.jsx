@@ -2,6 +2,7 @@ import AccountForm from "../components/account/AccountForm";
 import SampleProfile from "../assets/sample_profile.jpg";
 import { useState, useEffect } from "react";
 import config from "../config/config";
+import { useStorage } from "../hooks/useStorage";
 
 const employmentForm = {
     employeeId: crypto.randomUUID(),
@@ -11,12 +12,13 @@ const employmentForm = {
     contractLength: "3y",
 };
 
-const MEDIC_ID = "329701c7-d238-47f6-9733-ea9024f814d8"; // TODO: get from auth
 const Account = () => {
     const [personalForm, setPersonalForm] = useState({});
+    const [storage, setStorage] = useStorage("user");
 
     useEffect(() => {
-        fetch(`${config.__server.domain + config.__server.endpoint}/Medics/${MEDIC_ID}`, {
+        console.log(storage);
+        fetch(`${config.__server.domain + config.__server.endpoint}/Medics/${storage?.medicId}`, {
             method: "GET",
         })
             .then((response) => response.json())
